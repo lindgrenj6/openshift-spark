@@ -73,12 +73,16 @@ RUN rm -rf /tmp/scripts
 USER root
 RUN rm -rf /tmp/artifacts
 
+USER root
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod 777 /entrypoint.sh
+
 USER 185
+
+EXPOSE 6066
+EXPOSE 8080
+EXPOSE 7077
 
 # Specify the working directory
 WORKDIR /tmp
-
-ENTRYPOINT ["/entrypoint"]
-
-CMD ["/launch.sh"]
-
+ENTRYPOINT ["/entrypoint.sh"]
